@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `Library Angel`,
+    description: `Library Angel is a lifestyle blog and consulting firm.`,
     author: `@gatsbyjs`,
   },
   plugins: [
@@ -9,10 +9,11 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `src`,
+        path: `${__dirname}/src/`,
       },
     },
+    `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -24,7 +25,17 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      //  icon: `src/images/favicon.ico`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-mongodb`,
+      options: {
+        dbName: `local`,
+        collection: `documents`,
+        map: {
+          documents: { body: `text/markdown` },
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
